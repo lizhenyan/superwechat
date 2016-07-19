@@ -16,7 +16,7 @@ public interface I {
 		String CU_NAME 								= 		"m_contact_cname";				//好友账号
 	}
 	
-	 interface Group {
+ interface Group {
 		String TABLE_NAME 							= 		"t_superwechat_group";
 		String GROUP_ID 							= 		"m_group_id";					// 主键
 		String HX_ID 								= 		"m_group_hxid";					//环信群组id
@@ -30,7 +30,7 @@ public interface I {
 		String ALLOW_INVITES 						= 		"m_group_allow_invites";		//是否可以邀请
 	}
 	
-	 interface Member {
+	public static interface Member {
 		String TABLE_NAME 							= 		"t_superwechat_member";
 		String MEMBER_ID 							= 		"m_member_id";					//主键
 		String USER_NAME 							= 		"m_member_user_name";			//用户账号
@@ -39,7 +39,7 @@ public interface I {
 		String PERMISSION 							= 		"m_member_permission";			//用户对群组的权限\n0:普通用户\n1:群组所有者
 	}
 	
-	 interface Avatar {
+interface Avatar {
 		String TABLE_NAME 							= 		"t_superwechat_avatar";
 		String AVATAR_ID 							= 		"m_avatar_id";					//主键
 		String USER_NAME 							= 		"m_avatar_user_name";			//用户账号或者群组账号
@@ -48,7 +48,7 @@ public interface I {
 		String UPDATE_TIME 							= 		"m_avatar_last_update_time";	//最后更新时间
 	}
 	
-	 interface Location {
+	interface Location {
 		String TABLE_NAME 							= 		"t_superwechat_location";
 		String LOCATION_ID 							= 		"m_location_id";				//主键
 		String USER_NAME 							= 		"m_location_user_name";			//用户账号
@@ -57,7 +57,7 @@ public interface I {
 		String IS_SEARCHED 							= 		"m_location_is_searched";		//是否可以被搜索到
 		String UPDATE_TIME 							= 		"m_location_last_update_time";	//最后更新时间
 	}
-
+	String SERVER_ROOT  = "http://10.0.2.2:8080/SuperWeChatServer/Server";
 //	String AVATAR_PATH 								= 		"E:/test/";
 	String ISON8859_1 								= 		"iso8859-1";
 	String UTF_8 									= 		"utf-8";
