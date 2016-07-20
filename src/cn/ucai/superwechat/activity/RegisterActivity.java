@@ -41,7 +41,7 @@ import cn.ucai.superwechat.utils.OkHttpUtils2;
  *
  */
 public class RegisterActivity extends BaseActivity {
-	private static final String TAG = RegisterActivity.class.getSimpleName();
+	private static final String TAG = RegisterActivity.class.getName();
 	private EditText userNameEditText;
 	private EditText passwordEditText;
 	private EditText confirmPwdEditText;
@@ -149,6 +149,7 @@ public class RegisterActivity extends BaseActivity {
 	}
 
 	private void registerAppServer() {
+		Log.e(TAG,"registerAppServer");
 		File file = new File(OnSetAvatarListener.getAvatarPath(RegisterActivity.this,I.AVATAR_TYPE_USER_PATH)
 				,avatarName+I.AVATAR_SUFFIX_JPG);
 		final OkHttpUtils2<Result> utils = new OkHttpUtils2<Result>();
@@ -156,8 +157,8 @@ public class RegisterActivity extends BaseActivity {
 				.addParam(I.User.USER_NAME,username)
 				.addParam(I.User.PASSWORD,pwd)
 				.addParam(I.User.NICK,nick)
-				.targetClass(Result.class)
 				.addFile(file)
+				.targetClass(Result.class)
 				.execute(new OkHttpUtils2.OnCompleteListener<Result>() {
 					@Override
 					public void onSuccess(Result result) {
@@ -180,6 +181,7 @@ public class RegisterActivity extends BaseActivity {
 	}
 
 	private void registerEMServer() {
+		Log.e(TAG,"registerEMServer");
 		new Thread(new Runnable() {
 			public void run() {
 				try {
