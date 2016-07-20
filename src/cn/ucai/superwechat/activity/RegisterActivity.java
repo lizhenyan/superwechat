@@ -29,19 +29,19 @@ import com.easemob.chat.EMChatManager;
 import com.easemob.exceptions.EaseMobException;
 
 import java.io.File;
-
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.SuperWeChatApplication;
 import cn.ucai.superwechat.bean.Result;
 import cn.ucai.superwechat.utils.I;
 import cn.ucai.superwechat.utils.OkHttpUtils2;
 
+
 /**
  * 注册页
  *
  */
 public class RegisterActivity extends BaseActivity {
-	private static final String TAG = RegisterActivity.class.getName();
+	private static final String TAG = RegisterActivity.class.getSimpleName();
 	private EditText userNameEditText;
 	private EditText passwordEditText;
 	private EditText confirmPwdEditText;
@@ -149,9 +149,8 @@ public class RegisterActivity extends BaseActivity {
 	}
 
 	private void registerAppServer() {
-		Log.e(TAG,"registerAppServer");
 		File file = new File(OnSetAvatarListener.getAvatarPath(RegisterActivity.this,I.AVATAR_TYPE_USER_PATH)
-				,avatarName+I.AVATAR_SUFFIX_JPG);
+				,avatarName+ I.AVATAR_SUFFIX_JPG);
 		final OkHttpUtils2<Result> utils = new OkHttpUtils2<Result>();
 		utils.setRequestUrl(I.REQUEST_REGISTER)
 				.addParam(I.User.USER_NAME,username)
@@ -168,6 +167,7 @@ public class RegisterActivity extends BaseActivity {
 						} else {
 							Log.e(TAG,"register fail..."+result.getRetCode());
 							pd.dismiss();
+
 						}
 					}
 
@@ -181,7 +181,6 @@ public class RegisterActivity extends BaseActivity {
 	}
 
 	private void registerEMServer() {
-		Log.e(TAG,"registerEMServer");
 		new Thread(new Runnable() {
 			public void run() {
 				try {
@@ -198,6 +197,7 @@ public class RegisterActivity extends BaseActivity {
 						}
 					});
 				} catch (final EaseMobException e) {
+					unRegisterAppServer();
 					runOnUiThread(new Runnable() {
 						public void run() {
 							if (!RegisterActivity.this.isFinishing())
@@ -219,8 +219,26 @@ public class RegisterActivity extends BaseActivity {
 				}
 			}
 		}).start();
+	}
 
+	private void unRegisterAppServer() {
+		OkHttpUtils2<Result> utils=new OkHttpUtils2<>();
+		utils.setRequestUrl(I.REQUEST_UNREGISTER)
+				.addParam(I.User.USER_NAME,username)
+				.targetClass(Result.class)
+				.execute(new OkHttpUtils2.OnCompleteListener<Result>() {
+					@Override
+					public void onSuccess(Result result) {
+						Log.e(TAG,"result="+result);
 
+					}
+
+					@Override
+					public void onError(String error) {
+						Log.e(TAG,"unregister error..."+error);
+
+					}
+				});
 	}
 
 	public void back(View view) {
