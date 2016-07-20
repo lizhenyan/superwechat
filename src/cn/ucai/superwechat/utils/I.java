@@ -63,6 +63,9 @@ interface Avatar {
 	String UTF_8 									= 		"utf-8";
 	String PAGE_ID 									= 		"page_id";						//分页的起始下标
 	String PAGE_SIZE 								= 		"page_size";					//分页的每页数量
+	String QUESTION                                =        "?";                           //问号
+	String EQU                                     	=        "=";                                 //等号
+
 	int DEFAULT_DISTANCE = 100; // 查找附近的人时，默认距离为100KM
 	int ID_DEFAULT									=		0;								//ID默认值
 	int UN_READ_MSG_COUNT_DEFAULT					=		0;								//未读消息数量默认值
