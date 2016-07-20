@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroupManager;
+import com.squareup.okhttp.internal.Util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,11 +42,13 @@ import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.SuperWeChatApplication;
 import cn.ucai.superwechat.applib.controller.HXSDKHelper;
 import cn.ucai.superwechat.bean.Result;
+import cn.ucai.superwechat.bean.UserAvatar;
 import cn.ucai.superwechat.db.UserDao;
 import cn.ucai.superwechat.domain.User;
 import cn.ucai.superwechat.utils.CommonUtils;
 import cn.ucai.superwechat.utils.I;
 import cn.ucai.superwechat.utils.OkHttpUtils2;
+import cn.ucai.superwechat.utils.Utils;
 
 /**
  * 登陆页面
@@ -185,12 +188,23 @@ public class LoginActivity extends BaseActivity {
 					public void onSuccess(Result result) {
 						Log.e(TAG,"result="+result);
 						if (result != null && result.isRetMsg()) {
+							UserAvatar user= (UserAvatar) result.getRetData();
+							Log.e(TAG,"user="+user);
+							saveUserToDB(user);
 							loginSuccess();
 						} else {
 							pd.dismiss();
-							Toast.makeText(getApplicationContext(), R.string.Login_failed + result.getRetCode(),
+							Toast.makeText(getApplicationContext(),
+									R.string.Login_failed + Utils.getResourceString(LoginActivity.this,result.getRetCode()),
 									Toast.LENGTH_SHORT).show();
 
+						}
+					}
+
+					private  void saveUserToDB(UserAvatar user){
+						if(user!=null){
+							UserDao dao = new UserDao(LoginActivity.this);
+							dao.saveUserAvatar(user);
 						}
 					}
 
