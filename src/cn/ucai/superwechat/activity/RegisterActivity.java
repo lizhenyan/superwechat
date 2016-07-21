@@ -29,9 +29,12 @@ import com.easemob.chat.EMChatManager;
 import com.easemob.exceptions.EaseMobException;
 
 import java.io.File;
+import java.util.ArrayList;
+
 import cn.ucai.superwechat.R;
 import cn.ucai.superwechat.SuperWeChatApplication;
 import cn.ucai.superwechat.bean.Result;
+import cn.ucai.superwechat.bean.UserAvatar;
 import cn.ucai.superwechat.utils.I;
 import cn.ucai.superwechat.utils.OkHttpUtils2;
 import cn.ucai.superwechat.utils.Utils;
@@ -42,6 +45,8 @@ import cn.ucai.superwechat.utils.Utils;
  *
  */
 public class RegisterActivity extends BaseActivity {
+	ArrayList<UserAvatar> contactList;
+
 	private static final String TAG = RegisterActivity.class.getSimpleName();
 	private EditText userNameEditText;
 	private EditText passwordEditText;
