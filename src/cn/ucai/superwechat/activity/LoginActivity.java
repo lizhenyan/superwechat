@@ -219,10 +219,12 @@ public class LoginActivity extends BaseActivity {
 				});
 	}
 
-	private void loginSuccess() {
+	private void loginSuccess(UserAvatar user) {
 		// 登陆成功，保存用户名密码
 		SuperWeChatApplication.getInstance().setUserName(currentUsername);
 		SuperWeChatApplication.getInstance().setPassword(currentPassword);
+		SuperWeChatApplication.getInstance().setUser(user);
+		SuperWeChatApplication.getInstance().setUserName(currentUsername);
 
 		try {
 			// ** 第一次登录或者之前logout后再登录，加载所有本地群和回话
