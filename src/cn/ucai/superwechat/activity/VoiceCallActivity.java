@@ -130,7 +130,7 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
 				final String st2 = getResources().getString(R.string.Is_not_yet_connected_to_the_server);
 				runOnUiThread(new Runnable() {
 					public void run() {
-						Toast.makeText(VoiceCallActivity.this, st2, 0).show();
+						Toast.makeText(VoiceCallActivity.this, st2, Toast.LENGTH_SHORT).show();
 					}
 				});
 			}
